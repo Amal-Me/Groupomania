@@ -1,0 +1,65 @@
+.pub {
+    width: 50%;
+    height: auto;    
+    color: white;
+    background-color: rgb(41, 40, 40);
+    border-radius: 10px;
+    margin: 40px;
+    padding: 20px;
+    display: flex;
+    flex-flow: column wrap;  
+}
+.Avatar {
+    color: black;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    /* justify-self: flex-start; */
+}
+
+.visuel {
+    display: flex;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+.visuel img {
+    max-width: 90%;
+    height: auto;    
+}
+
+.content {
+    padding-top: 20px;    
+}
+
+.likes {
+
+        
+    color: red;
+    align-self: end;
+    margin: 10px;
+}
+.like {
+    width: 20px;   
+}
+
+.sup {
+    width: 20px;     
+}
+
+.supr {
+
+    border: none;
+    background-color: black;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    align-self: end;
+    margin: 10px;
+    
+}
+
+.coms {
+    padding-top: 20px;
+}

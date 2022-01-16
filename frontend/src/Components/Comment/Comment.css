@@ -1,0 +1,11 @@
+.com {
+    color: white;
+    background-color: rgb(75, 74, 74);
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    color: white;
+    padding: 10px;    
+}
+

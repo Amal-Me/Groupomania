@@ -1,13 +1,25 @@
-body {
+*, ::before, ::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(9, 31, 67) ;
+}
+
+.btn {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: white;
+  font-size: 15px;
+  background: linear-gradient(rgb(9, 31, 67), rgb(32, 99, 206));
+  border-radius: 6px;
+  padding: 0 20px;
+  border: none;
+  margin: 20px;
+  box-shadow: -2px 0 7px #000000, 2px 6px 7px #131313;
+  /* transition: all 500ms; */
 }

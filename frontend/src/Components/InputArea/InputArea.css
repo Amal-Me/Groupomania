@@ -1,0 +1,33 @@
+.textZone {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    display: flex;    
+    min-width: 30%;
+    min-height: 200px; 
+    border-radius: 10px;
+    background-color: rgb(41, 40, 40);
+    padding:0 20px 0 20px;
+    border: black 4px solid;
+}
+
+label {
+
+    color: rgb(170, 169, 169);
+    margin: 10px 0 10px 3px;
+    font-size: 12px;
+}
+
+form {
+    min-width: 80%;
+    margin:auto;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+
+.inp-textZone {
+
+    border-radius: 5px;
+    padding-bottom: 30px;
+}
