@@ -1,65 +1,108 @@
 .pub {
-    width: 50%;
+    width: 60%;
+    min-width: 300px;
     height: auto;    
     color: white;
-    background-color: rgb(41, 40, 40);
+    background-color:rgb(14, 49, 105);
     border-radius: 10px;
     margin: 40px;
     padding: 20px;
     display: flex;
-    flex-flow: column wrap;  
+    flex-flow: column wrap; 
+    box-shadow: 4px 7px 12px #000000;
+    animation: fadey 1500ms forwards ; 
 }
+/* animation apparition publication */
+@keyframes fadey {
+    0% {
+      opacity: 0;
+      transform: translateY(-300px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 .Avatar {
-    color: black;
-    font-size: 0.8rem;
+    color: rgb(145, 190, 233);
+    font-size: 14px;
     font-weight: bold;
-    margin-bottom: 20px;
-    /* justify-self: flex-start; */
+    margin: -50px 0 0 0;
+    justify-self: flex-start;
+    flex-basis: 90%;
+}
+.Avatar p {
+    font-size: 10px;
+    font-weight: lighter;
+}
+
+.avatarImg {
+    width: 50px;
+    margin-right: 5px;
 }
 
 .visuel {
     display: flex;
-    max-width: 80%;
-    height: auto;
+    width: 300px;
+    height: 300px;
     margin: auto;
 }
 
 .visuel img {
     max-width: 90%;
-    height: auto;    
+    height: 90%;    
 }
 
 .content {
-    padding-top: 20px;    
+    padding: 20px 0;    
+}
+
+.bl {
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px 0;
 }
 
 .likes {
-
-        
+    display: flex;
+    width: 60px;    
+    height: 25px; 
+    margin: -40px 0 0 0; 
+    padding: 3px 6px; 
+    border-radius: 6px;
+    border: none;   
+    background: linear-gradient(rgb(9, 31, 67), rgb(60, 127, 236));
+}
+.likes:hover {
+    box-shadow: 4px 5px 10px rgb(133, 10, 10);
     color: red;
-    align-self: end;
-    margin: 10px;
 }
 .like {
-    width: 20px;   
+    width: 20px;  
 }
-
+.suprpub {
+    margin: -40px -10px 0 10px;
+}
 .sup {
     width: 20px;     
 }
 
-.supr {
-
+.supr {   
     border: none;
     background-color: black;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    align-self: end;
-    margin: 10px;
-    
 }
 
 .coms {
     padding-top: 20px;
+}
+
+@media screen and (max-width: 799px) {
+   .pub {
+       width: 100%;
+       margin: 40px auto;
+       border-radius: 0;
+   } 
 }

@@ -1,24 +1,25 @@
 const fs = require("fs");
-const jwt = require("jsonwebtoken");
 const db = require("../models/mpd");
-const mysql = require("mysql");
 
+//SSE pour mise à jour du contenu
 exports.getStream = (req, res, next) => {
+  //configuration de l'en-tête pour préciser le type et garder la connection ouverte
   res.writeHead(200, {
     "Cache-Control": "no-cache",
     Connection: "keep-alive",
     "Content-Type": "text/event-stream",
   });
-  const writeEvent = (res, sseId, data, event = 'message') => {
+  //configuration des données de la réponse
+  const writeEvent = (res, sseId, data, event = "message") => {
     res.write(`id: ${sseId}\n`);
     res.write(`type: ${event}\n`);
     res.write(`data: ${data}\n\n`);
   };
+  //sélection des tables nécessaires
   const sqlSelect =
     "SELECT * FROM Publication;SELECT * FROM Comment;SELECT * FROM LikePub; SELECT * FROM User;";
-
-  const Streamer = true;
-  const SEND_INTERVAL = Streamer ? 2000 : 500;
+  //fréquence de mise à jour
+  const SEND_INTERVAL = 2000;
   setInterval(() => {
     return new Promise((resolve, reject) => {
       db.query(sqlSelect, (err, result) => {
@@ -27,15 +28,18 @@ exports.getStream = (req, res, next) => {
       });
     })
       .then((all) => {
+        //répartition des tables pour traitement
         const pub = all[0];
         const com = all[1];
         const like = all[2];
         const user = all[3];
+        //association du créateur à son commentaire dans un objet 
         com.map((i) => {
           const Users = user.filter((e) => e.UserId === i.User_Id);
           const addCom = { Users };
           return Object.assign(i, addCom);
         });
+        //association du créateur de la publication ainsi que les likes et les commentaires associés à celle ci dans un objet 
         pub.map((i) => {
           const Comments = com.filter(
             (e) => e.Publication_Id === i.PublicationId
@@ -47,76 +51,19 @@ exports.getStream = (req, res, next) => {
           const addPub = { Comments, Likes, Users };
           return Object.assign(i, addPub);
         });
-        const dataAll = typeof pub === 'object' ? JSON.stringify(pub) : pub;
+        const dataAll = JSON.stringify({ Publications: pub, Users: user });
         return dataAll;
       })
       .then((all) => {
-        const connection = [];
-        connection.push(res);
+        //création d'un tableau connection pour enregistrer toutes les connections 
+        const connections = [];
+        connections.push(res);
         const sseId = new Date().toDateString();
-        const event = 'message';
-        connection.map((con)=> {
-        writeEvent(res, sseId, all); })
-
-        
+        const event = "message";
+        //distribution des mises à jour à toutes les connections
+        connections.map((connect) => {
+          writeEvent(connect, sseId, all);
+        });
       });
   }, SEND_INTERVAL);
 };
-
-exports.getAllForum = (req, res, next) => {
-  const sqlSelect = "SELECT * FROM Publication;";
-  return new Promise((resolve, reject) => {
-    db.query(sqlSelect, (err, result) => {
-      if (err) return reject(err);
-      return resolve(result);
-    });
-  }).then((all) => {
-    res.status(200).json(all);
-  });
-};
-
-// exports.getStream = (req, res, next) => {
-//   const writeEvent = (res, sseId, data) => {
-//     res.write(`id: ${sseId}\n`);
-//     res.write(`data: ${data}\n\n`);
-//   };
-//   const sendEvent = (req, res) => {
-//     res.writeHead(200, {
-//       "Cache-Control": "no-cache",
-//       Connection: "keep-alive",
-//       "Content-Type": "text/event-stream",
-//       // "Access-Control-Allow-Origin": "*",
-//     });
-//     // if (middelwareOn) {
-//     //   const sseId = new Date().toDateString();
-//     //   writeEvent(res, sseId, JSON.stringify(middelwareOn));
-//     // }
-
-//     // const SEND_INTERVAL = 2000;
-//     // setInterval(() => {
-//     //     const sseId = new Date().toDateString();
-//     //     writeEvent(res, sseId, JSON.stringify("ca marche"));
-//     //   }, SEND_INTERVAL);
-
-//     const sqlSelect = "SELECT * FROM Publication;SELECT * FROM Comment;SELECT * FROM LikePub; SELECT * FROM User";
-//     return new Promise((resolve, reject) => {
-//       db.query(sqlSelect, (err, result) => {
-//         if (err) return reject(err);
-//         console.log(result);
-//         return resolve(result);
-
-//       });
-//     }).then((all) => {
-//       const sseId = new Date().toDateString();
-//       writeEvent(res, sseId, JSON.stringify(all));
-//     });
-//   };
-//   if (req.headers.accept === "text/event-stream") {
-//     sendEvent(req, res);
-//   } else {
-//     res.json({ message: "Ok" });
-//   }
-// };
-
-// exports.createForum = (req,res,next) =>{}
-// exports.deleteForum = (req,res,next) =>{}

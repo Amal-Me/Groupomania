@@ -1,14 +1,13 @@
 import {combineReducers} from 'redux';
-import logged from './IsLogged'
-import counter from './counter'
 import apiCall from './apiCall';
-import usersCall from './users';
+import deletePost from './delete';
+import likeState from './likeState';
 
+//regroupement des reducers
 export default combineReducers({
-    logged,
-    counter,
     apiCall,
-    usersCall,
+    deletePost,
+    likeState,
 });
 
  

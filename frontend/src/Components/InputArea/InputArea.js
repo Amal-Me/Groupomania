@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import "./InputArea.css";
 
-export default function InputArea() {  
-  const [post, setPost] = useState({ Content: "" });
+//zone de saisie publication
+export default function InputArea() {
+  //initialisation du state local
+  const [post, setPost] = useState({ Content: "", files: "" });
 
+  //récupération des données du formulaire
   const handleInputs = (e) => {
     if (e.target.classList.contains("inp-textZone")) {
+      //création d'un objet avec la mise à jour des infos
       const newObjState = { ...post, Content: e.target.value };
+      //mise à jour du state
+      setPost(newObjState);
+    } else if (e.target.classList.contains("inp-file")) {
+      const newObjState = { ...post, files: e.target.value };
       setPost(newObjState);
     }
   };
 
-  const ImgUp = document.querySelector("#imgUp");
+  
+  //soumission formulaire
   const handleForm = (e) => {
     e.preventDefault();
     const auth = JSON.parse(sessionStorage.getItem("auth"));
+    const ImgUp = document.querySelector("#imgUp");
     const formData = new FormData();
     formData.append("Content", post.Content);
     formData.append("image", ImgUp.files[0]);
@@ -31,17 +41,18 @@ export default function InputArea() {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
-    setPost({ Content: "" });
+    //réinitialisation du state après envoi
+    setPost({ Content: "", files: "" });
   };
 
   return (
     <div className="textZone">
       <form onSubmit={handleForm}>
-        <label htmlFor="textZone">Zone de saisie</label>
-        <input 
+        <label htmlFor="textZone">Saisissez votre texte</label>
+        <input
           onInput={handleInputs}
           value={post.Content}
-          type="textarea"          
+          type="textarea"
           id="textZone"
           placeholder="Ecrivez ici"
           className="inp-textZone"

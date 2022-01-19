@@ -1,11 +1,28 @@
 .com {
     color: white;
-    background-color: rgb(75, 74, 74);
+    background-color:  rgb(9, 31, 67);
     border-radius: 10px;
     margin: 10px;
     display: flex;
     flex-flow: column wrap;
     color: white;
-    padding: 10px;    
+    padding: 10px; 
+    box-shadow: 4px 7px 12px #000000;
+    animation: fadex 2500ms forwards ; 
+}
+/* animation apparition commentaire */
+@keyframes fadex {
+    0% {
+      opacity: 0;
+      transform: translateX(-300px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }     
 }
 
+.com button {
+    margin: 10px 0 0 0;
+    align-self: flex-end;
+}

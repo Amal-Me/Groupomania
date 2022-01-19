@@ -42,25 +42,26 @@ const sqlPublication =
   "Forum_Id INT NOT NULL," +
   "PRIMARY KEY (PublicationId)," +
   "FOREIGN KEY (Forum_Id) REFERENCES Forum(ForumId)," +
-  "FOREIGN KEY (User_Id) REFERENCES User(UserId))";
+  "FOREIGN KEY (User_Id) REFERENCES User(UserId) ON DELETE CASCADE)";
 
 const sqlComment =
   "CREATE TABLE IF NOT EXISTS Comment" +
   "(CommentId INT NOT NULL AUTO_INCREMENT," +
   "Temps DATETIME ," +
   "Content VARCHAR(100) NOT NULL ," +
+  "ImageUrl VARCHAR(500) ," +
   "Publication_Id INT," +
   "User_Id INT," +
   "PRIMARY KEY (CommentId)," +
-  "FOREIGN KEY (Publication_Id) REFERENCES Publication(PublicationId)," +
-  "FOREIGN KEY (User_Id) REFERENCES User(UserId))";
+  "FOREIGN KEY (Publication_Id) REFERENCES Publication(PublicationId) ON DELETE CASCADE," +
+  "FOREIGN KEY (User_Id) REFERENCES User(UserId) ON DELETE CASCADE)";
 
 const sqlLikePub =
   "CREATE TABLE IF NOT EXISTS LikePub" +
   "(Publication_Id INT NOT NULL," +
   "User_Id INT NOT NULL," +
-  "FOREIGN KEY (Publication_Id) REFERENCES Publication(PublicationId)," +
-  "FOREIGN KEY (User_Id) REFERENCES User(UserId)," +
+  "FOREIGN KEY (Publication_Id) REFERENCES Publication(PublicationId) ON DELETE CASCADE," +
+  "FOREIGN KEY (User_Id) REFERENCES User(UserId) ON DELETE CASCADE," +
   "PRIMARY KEY (Publication_Id, User_Id))";
 
 const sqlConnection =
@@ -68,7 +69,7 @@ const sqlConnection =
   "(Forum_Id INT NOT NULL," +
   "User_Id INT NOT NULL," +
   "FOREIGN KEY (Forum_Id) REFERENCES Forum(ForumId)," +
-  "FOREIGN KEY (User_Id) REFERENCES User(UserId)," +
+  "FOREIGN KEY (User_Id) REFERENCES User(UserId) ON DELETE CASCADE," +
   "PRIMARY KEY (Forum_Id, User_Id))";
 
 const sqlInsRole =
@@ -77,17 +78,21 @@ const sqlInsRole =
 const sqlInsForum =
   "INSERT INTO Forum (Title) VALUES ('forumPrincipal') ON DUPLICATE KEY UPDATE Title = Title";
 
-db = mysql.createConnection({  database: "groupomania",
+db = mysql.createConnection({
+  database: "groupomania",
   host: "localhost",
   user: "root",
-  password: "Formation2021",
+  password: "",
   multipleStatements: true,
 });
 
-db.query({sql:`${sqlRole};  ${sqlUser};  ${sqlForum};  ${sqlPublication};
+db.query(
+  {
+    sql: `${sqlRole};  ${sqlUser};  ${sqlForum};  ${sqlPublication};
   ${sqlLikePub};  ${sqlComment};  ${sqlLikePub};  ${sqlConnection};
   ${sqlInsRole};  ${sqlInsForum}  `,
-  timeout:1000},
+    timeout: 1000,
+  },
   (err, res) => {
     if (err) throw err;
     console.log("Création des TABLES et INSTANCES");

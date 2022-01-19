@@ -1,6 +1,30 @@
 .flow{
-    width: 60%;  
-    min-height: 500px;  
-    /* border: solid 1px white; */
+    display:flex;
+    flex-direction: column-reverse;
+    width: 80%; 
+    min-width: 300px; 
+    min-height: 500px; 
     margin: auto;
+}
+
+.flow label {
+
+    color: rgb(170, 169, 169);
+    margin: 10px 0 10px 3px;
+    font-size: 12px;
+}
+
+.flow form {
+    min-width: 80%;
+    margin:auto;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 799px) {
+    .flow {
+
+        width: 100%;
+    }
 }

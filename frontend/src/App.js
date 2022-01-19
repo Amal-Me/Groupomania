@@ -1,42 +1,36 @@
-import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom';
-// import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import './App.css';
-import Home from './Containers/Home/Home'
-import Forum from './Containers/Forum/Forum'
-import Profile from './Containers/Profile/Profile'
-import { useDispatch } from "react-redux";
-
+import React from "react";
+import "./App.css";
+import Home from "./Containers/Home/Home";
+import Forum from "./Containers/Forum/Forum";
+import Profile from "./Containers/Profile/Profile";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { isEmpty } from "./Components/Utils";
 
 function App() {
-
   
-//A METTRE A JOUR POUR ISAUTH
-  // export const isEmpty = (value) => {
-  //   return (
-  //     value === undefined ||
-  //     value === null ||
-  //     (typeof value === "object" && Object.keys(value).length === 0) ||
-  //     (typeof value === "string" && value.trim().length === 0)
-  //   );
-  // };
+  //vérification de l'existence d'un token pour autoriser le routage
+  const auth = JSON.parse(sessionStorage.getItem("auth"));
+  let isAuth;
+  !isEmpty(auth) &&
+    (auth.token === undefined ? (isAuth = false) : (isAuth = true));
 
-
-  // const dispatch = useDispatch();
-  // const isAuth = useSelector(state => state.isAuth)
-  // const newAuth = JSON.parse(sessionStorage.getItem("auth"))
-  // newAuth != null ? dispatch(!newAuth) :console.log(0);      
-         
-  const isAuth = true;
   return (
-    <>  
+    <>
       <Routes>
-       <Route path="/" element={<Home />}/>
-       
-       <Route path="/forum" element={isAuth ? <Forum /> : <Navigate to={"/"}/>}/>
-       <Route path="/forum/:slug" element={isAuth ? <Forum /> : <Navigate to={"/"}/>}/>
-       <Route path="/profile/:slug" element={isAuth ? <Profile /> : <Navigate to={"/"}/>}/>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/forum"
+          element={
+            //empêche la navigation si pas authentifié
+            !isEmpty(isAuth) && isAuth ? <Forum /> : <Navigate to={"/"} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            !isEmpty(isAuth) && isAuth ? <Profile /> : <Navigate to={"/"} />
+          }
+        />
       </Routes>
     </>
   );

@@ -2,11 +2,12 @@
     display: flex;
     flex-flow: column wrap;
     width: 30%;
-    height: 300px;
+    min-width: 200px;    
     background-color: rgb(87, 136, 192);
     color: white;
     margin: 50px;
     border-radius: 8px;
+    padding-top: 20px;
 }
 
 .Sign button {
@@ -21,4 +22,12 @@
 
    margin-left: 20px;
 
+}
+
+.Sign p {
+
+    font-weight: bold;
+    margin: 3px 20px;
+    color: black;
+    font-size: 12px;
 }

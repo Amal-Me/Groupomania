@@ -2,7 +2,6 @@
 const bcrypt = require("bcrypt");
 //importation du model User
 const db = require("../models/mpd");
-const mysql = require("mysql");
 //jeton permettant d’échanger des informations de manière sécurisée
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -16,7 +15,7 @@ exports.signup = (req, res, next) => {
       const sqlInsertUser =
         "INSERT INTO User (Email, Password, Pseudo) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE Email = Email";
 
-      //enregistrement dans la collection Users de la BDD
+      //enregistrement dans la table User de la BDD
       db.query(
         sqlInsertUser,
         [req.body.email, hash, req.body.pseudo],
@@ -25,7 +24,7 @@ exports.signup = (req, res, next) => {
           console.table(res);
         }
       );
-      console.table([req.body.email, hash, req.body.pseudo])
+      console.table([req.body.email, hash, req.body.pseudo]);
     })
     .then(() => res.status(201).json({ message: "Utilisateur enregistré" }))
     .catch((error) => res.status(500).json({ error }));
@@ -51,9 +50,17 @@ exports.login = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect" });
           }
-          //renvoi du userId et du token au front
+          //renvoi du user et du token au front
           res.status(200).json({
             userId: user.UserId,
+            Pseudo: user.Pseudo,
+            Email: user.Email,
+            Name: user.Name,
+            FirstName: user.FirstName,
+            DateOfBirth: user.DateOfBirth,
+            Phone: user.Phone,
+            Job: user.Job,
+            ImageUrl: user.ImageUrl,
             token: jwt.sign(
               //encodage du token
               { userId: user.UserId },
@@ -62,10 +69,11 @@ exports.login = (req, res, next) => {
             ),
           });
           const sqlInsertConnect =
+          //assignation d un Id de forum par défaut(dans l'attente d'une création multi forums)
             "INSERT INTO Connection (User_Id, Forum_Id) VALUES (?, ?) ON DUPLICATE KEY UPDATE User_Id = User_Id";
           db.query(sqlInsertConnect, [user.UserId, 1], (err, res) => {
-            if (err) throw err;            
-          });          
+            if (err) throw err;
+          });
         })
         .catch((error) => res.status(500).json({ error }));
     })

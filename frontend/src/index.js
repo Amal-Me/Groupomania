@@ -1,23 +1,23 @@
+import App from "./App";
 import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import rootReducer from "./reducer";
-import thunk from 'redux-thunk'
+//provider à la racine pour que le store contenant les states soit accessible
 import { Provider } from "react-redux";
-import App from "./App";
-import { createStore, applyMiddleware} from "redux";
-import {composeWithDevTools} from "redux-devtools-extension";
+//middleware qui gère l'asynchrone
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
+//pour combiner les différents reducers
+import rootReducer from "./reducer";
+//outil de dévelopement dans le navigateur
+import { composeWithDevTools } from "redux-devtools-extension";
 
-import {getUsers} from "./action";
-
-
-// const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
-
-// store.dispatch(getUsers());
-// console.log(store);
+//création du store avec les reducers et middlewares associés
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <Provider store={store}>

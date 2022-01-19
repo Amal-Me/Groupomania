@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
 import "./Signup.css";
+import { verifInput } from "../Utils";
 
+//inscription
 export default function Signup() {
+  //initialisation du state local
   const [sign, setSign] = useState({
     email: "",
     password: "",
     passwordbis: "",
   });
 
+  //soumission formulaire
   const handleForm = (e) => {
     e.preventDefault();
     const requestOptions = {
@@ -16,10 +19,16 @@ export default function Signup() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sign),
     };
-    fetch("http://localhost:3000/api/auth/signup", requestOptions)
-      .then((response) => response.json())
-      .catch((err) => console.log(err));
+    //conditions de vérifications REGEX avant envoi
+    if (verifInput()) {
+      fetch("http://localhost:3000/api/auth/signup", requestOptions)
+        .then((response) => response.json())
+        .catch((err) => console.log(err));
 
+      alert("Votre compte a bien été créé, vous pouvez vous connecter");
+    }
+
+    //réinitialisation du state après envoi
     setSign({
       email: "",
       password: "",
@@ -27,9 +36,12 @@ export default function Signup() {
     });
   };
 
+  //récupération des données du formulaire
   const handleInputs = (e) => {
     if (e.target.classList.contains("inp-email")) {
+      //création d'un objet avec la mise à jour des infos
       const newObjState = { ...sign, email: e.target.value };
+      //mise à jour du state
       setSign(newObjState);
     } else if (e.target.classList.contains("inp-password")) {
       const newObjState = { ...sign, password: e.target.value };
@@ -44,7 +56,7 @@ export default function Signup() {
     <div className="Sign">
       <h2>Inscription</h2>
       <br />
-      <form className="signForm"  onSubmit={handleForm}>
+      <form className="signForm" onSubmit={handleForm}>
         <label htmlFor="Email">Email</label>
         <br />
         <input
@@ -55,7 +67,9 @@ export default function Signup() {
           placeholder="Entrez votre Email"
           className="inp-email"
         />
-        <br /><br />
+        <p id="emailErrorMsg"></p>
+        <br />
+        <br />
         <label htmlFor="Motdepasse">Mot de passe</label>
         <br />
         <input
@@ -66,7 +80,9 @@ export default function Signup() {
           placeholder="Entrez un mot de passe"
           className="inp-password"
         />
-        <br /><br />
+        <p id="MotdepasseErrorMsg"></p>
+        <br />
+        <br />
         <label htmlFor="Motdepassebis">Mot de passe</label>
         <br />
         <input
@@ -77,8 +93,10 @@ export default function Signup() {
           placeholder="Entrez à nouveau votre mot de passe"
           className="inp-passwordbis"
         />
-        <br /><br />
-        <button>Valider</button>
+        <p id="MotdepassebisErrorMsg"></p>
+        <br />
+        <br />
+        <button className="btn">Valider</button>
       </form>
     </div>
   );

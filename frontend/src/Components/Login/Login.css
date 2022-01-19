@@ -2,19 +2,17 @@
     display: flex;
     flex-flow: column wrap;
     width: 30%;
-    height: 200px;
+    min-width: 200px;    
     background-color: rgb(87, 136, 192);
     color: white;
     margin: 50px;
     border-radius: 8px;
-}
-
+    padding-top: 20px;
+  }
 .log h2 {
     text-align: center;
     margin-bottom: 15px;
 }
 .logForm {
-
    margin-left: 20px;
-
 }

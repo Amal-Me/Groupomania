@@ -1,12 +1,17 @@
-// const Publication = require('../models/Publication');
-
 module.exports = (req, res, next) => {
-   // on cherche la sauce pour récupérer l id du créateur
-   Publication.findOne({ _id: req.params.id})
-    .then(publication => { 
+  try {
     //comparaison id du créateur avec celui extrait du token
-    if (publication.userId !== req.token.userId) {
-        throw 'Utilisateur non valide';
-      } else { next();}})
-    .catch(e => res.status(403).json({message: e}))
-}
+    if (req.token.userId === 1) {
+      next();
+    }
+    if (req.body.User_Id !== req.token.userId) {
+      throw "Utilisateur non valide";
+    } else {
+      next();
+    }
+  } catch {
+    res.status(401).json({
+      error: "error" || "Requête non authentifiée",
+    });
+  }
+};

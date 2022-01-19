@@ -1,7 +1,7 @@
 const fs = require("fs");
-const jwt = require("jsonwebtoken");
 const db = require("../models/mpd");
 
+//récupération des infos profil
 exports.getProfile = (req, res, next) => {
   const sqlSelect = "SELECT * FROM User;";
   return new Promise((resolve, reject) => {
@@ -14,26 +14,24 @@ exports.getProfile = (req, res, next) => {
   });
 };
 
+//modifications des info profil
 exports.modifyProfile = (req, res, next) => {
-  const profileObject = req.file
-    ? {
-        ...JSON.parse(req.body),
-        ImageUrl: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
-      }
-    : { ...req.body };
+  if (req.file) {
+    imageUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+  } else {
+    imageUrl = null;
+  }
   const sqlUpdate =
-    "UPDATE User SET Pseudo = ?, Name = ?, FirstName = ?, DateOfBirth = ?, Phone = ?, Job = ?, ImageUrl = ?, Role_Id = ?, WHERE UserId = ?";
+    "UPDATE User SET Pseudo = ?, Name = ?, FirstName = ?, DateOfBirth = ?, Job = ?, ImageUrl = ? WHERE UserId = ?;";
   const sqlData = [
     req.body.Pseudo,
     req.body.Name,
     req.body.FirstName,
     req.body.DateOfBirth,
-    req.body.Phone,
     req.body.Job,
-    req.body.ImageUrl,
-    req.body.Role_Id,
+    imageUrl,
     req.body.UserId,
   ];
   db.query(sqlUpdate, sqlData, (err, res) => {
@@ -42,8 +40,15 @@ exports.modifyProfile = (req, res, next) => {
   return res.status(201).json({ message: "Profil modifié" });
 };
 
-exports.deconnectProfile = (req, res, next) => {};
+//suppression du compte dans la BDD
 exports.deleteProfile = (req, res, next) => {
+  if (req.body.imageUrl) {
+    const filename = req.body.imageUrl.split("/images/")[1];
+    fs.unlink(`images/${filename}`, (err) => {
+      if (err) throw err;
+      console.log("filename was deleted");
+    });
+  }
   const sqlDelete = "DELETE FROM User WHERE `UserId` = ?;";
   const sqlData = [req.body.UserId];
   db.query(sqlDelete, sqlData, (err, res) => {
@@ -51,4 +56,3 @@ exports.deleteProfile = (req, res, next) => {
   });
   return res.status(201).json({ message: "Profil supprimé !" });
 };
-
