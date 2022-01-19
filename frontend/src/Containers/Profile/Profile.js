@@ -91,7 +91,7 @@ export default function Profile() {
       DateOfBirth: "",
       Job: "",
     });
-    // document.location.href="http://localhost:3001/forum";
+    document.location.href="http://localhost:3001/forum";
   };
 
   //suppression compte
