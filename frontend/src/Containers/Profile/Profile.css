@@ -1,0 +1,40 @@
+.formZone1 {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+.formZone1 input {
+    margin: 5px 20px;
+    width: 50%;
+}
+.formZone1 label {    
+    width: 50%;
+    color: white;
+}
+
+.profilImg {
+
+    margin: 0 50px 0 30px;
+}
+
+.profilZone {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 20px 0 20px;
+}
+.infoProfil{
+    margin-top: 20px;
+}
+.infoProfil p{
+
+    color: rgb(145, 190, 233);
+    margin: 10px;
+}
+
+.infoProfil span {
+    color:white;
+}
+
+.modal {
+    animation: fadex 2500ms forwards ;
+}

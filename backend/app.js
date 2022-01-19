@@ -3,7 +3,7 @@ const express     = require('express');
 const app         = express();
 //HELMET collection de middleware définissant des en-têtes HTTP liés à la sécurité
 const helmet      = require('helmet');
-//mysql facilite les interactions avec la BDD
+//mysql pour les interactions avec la BDD
 const mysql = require('mysql');
 //accès au chemin de notre serveur(path)
 const path        = require('path');
@@ -12,14 +12,15 @@ const profileRoutes  = require('./routes/profile');
 const forumRoutes  = require('./routes/forum');
 const publicationRoutes = require('./routes/publication');
 //importation dotenv pour masquer les informations voulues 
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
-// const connexConfig = 'mysql://root:Formation2021@localhost/mdb?charset=utf8_general_ci&timezone=-0700';
+ 
 
 var db = mysql.createConnection({
-  host:"localhost",
-  user:"root",
-  password:"Formation2021"
+  host: "localhost",
+  user: "root",
+  password: ""
 });
 
 // connection a la base de données

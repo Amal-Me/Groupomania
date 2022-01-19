@@ -1,0 +1,62 @@
+.Home {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.Bienvenue {
+    margin: 60px 0 30px 0;
+    color:white;
+    font-size: 18px;
+    width: 90%;
+    min-height: 50%;
+    text-align: justify;
+}
+
+.Reglement {
+    margin: 30px 0 ;
+    color:rgb(121, 118, 118);
+    font-size: 16px;
+    width: 90%;
+    min-height: 50%;
+    text-align: justify;
+}
+
+.img {   
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.img img {
+    width: 20%;
+    min-width:200px ;
+}
+
+.Home label {
+    
+    margin: 10px  0 10px 5%;
+   
+}
+
+.Home form {
+    min-width: 80%;
+    margin:auto;
+    display: flex;
+    flex-flow: column wrap;    
+}
+
+.Home input {
+    min-width: 90%;
+    border-radius: 5px;
+}
+
+.btnLog {
+  color: white;
+  font-size: 15px;
+  background: linear-gradient(rgb(9, 31, 67), rgb(60, 127, 236));
+  border-radius: 6px;
+  border: none;
+  box-shadow: -2px 0 7px #000000, 2px 6px 7px #131313;
+  margin: 10%;
+}
