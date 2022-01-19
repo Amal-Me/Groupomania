@@ -77,26 +77,26 @@ const sqlInsRole =
 
 const sqlInsForum =
   "INSERT INTO Forum (Title) VALUES ('forumPrincipal') ON DUPLICATE KEY UPDATE Title = Title";
-
-db = mysql.createConnection({
-  database: "groupomania",
-  host: "localhost",
-  user: "root",
-  password: "",
-  multipleStatements: true,
-});
-
-db.query(
-  {
-    sql: `${sqlRole};  ${sqlUser};  ${sqlForum};  ${sqlPublication};
-  ${sqlLikePub};  ${sqlComment};  ${sqlLikePub};  ${sqlConnection};
-  ${sqlInsRole};  ${sqlInsForum}  `,
-    timeout: 1000,
-  },
-  (err, res) => {
-    if (err) throw err;
-    console.log("Création des TABLES et INSTANCES");
-  }
-);
+setTimeout(() => {
+  db = mysql.createConnection({
+    database: "groupomania",
+    host: "localhost",
+    user: "root",
+    password: "",
+    multipleStatements: true,
+  });
+  db.query(
+    {
+      sql: `${sqlRole};  ${sqlUser};  ${sqlForum};  ${sqlPublication};
+      ${sqlLikePub};  ${sqlComment};  ${sqlLikePub};  ${sqlConnection};
+      ${sqlInsRole};  ${sqlInsForum}  `,
+      timeout: 1000,
+    },
+    (err, res) => {
+      if (err) throw err;
+      console.log("Création des TABLES et INSTANCES");
+    }
+  );
+}, 1000);
 
 module.exports = db;
