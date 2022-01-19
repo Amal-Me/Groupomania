@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     //extraction du token dans l en-tête "Authorization" de la requête
     const token = req.headers.authorization.split(" ")[1];
     //verification-décodage stocké dans la requête pour réutilisation
-    req.token = jwt.verify(token, process.env.TOKEN_KEY);
+    req.token = jwt.verify(token, Clé_très_sécurisée);
     //comparaison userId avec celui extrait du token
     if (req.body.userId && req.body.userId !== req.token.userId) {
       throw "Utilisateur non valide";
