@@ -1,3 +1,4 @@
+//mysql pour les interactions avec la BDD
 const mysql = require("mysql");
 var db = "";
 
@@ -81,7 +82,7 @@ const sqlInsForum =
 db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Formation2021",
+  password: "",
   multipleStatements: true,  
 });
 db.connect( (err) => {
