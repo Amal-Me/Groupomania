@@ -77,19 +77,30 @@ const sqlInsRole =
 
 const sqlInsForum =
   "INSERT INTO Forum (Title) VALUES ('forumPrincipal') ON DUPLICATE KEY UPDATE Title = Title";
-setTimeout(() => {
-  db = mysql.createConnection({
-    database: "groupomania",
-    host: "localhost",
-    user: "root",
-    password: "",
-    multipleStatements: true,
+
+db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Formation2021",
+  multipleStatements: true,  
+});
+db.connect( (err) => {
+  if (err) throw err;
+  console.log("Connecté à la base de données MySQL!");
+  
+  db.query("CREATE DATABASE IF NOT EXISTS groupomania", (err, result) => {
+    if (err) throw err;
+    console.log("Base de données créée !");
+  });
+  db.query("use groupomania", (err, result) => {
+    if (err) throw err;
+    console.log("Connecté à groupomania!");
   });
   db.query(
     {
       sql: `${sqlRole};  ${sqlUser};  ${sqlForum};  ${sqlPublication};
-      ${sqlLikePub};  ${sqlComment};  ${sqlLikePub};  ${sqlConnection};
-      ${sqlInsRole};  ${sqlInsForum}  `,
+    ${sqlLikePub};  ${sqlComment};  ${sqlLikePub};  ${sqlConnection};
+    ${sqlInsRole};  ${sqlInsForum}  `,
       timeout: 1000,
     },
     (err, res) => {
@@ -97,6 +108,8 @@ setTimeout(() => {
       console.log("Création des TABLES et INSTANCES");
     }
   );
-}, 1000);
+});
+
+
 
 module.exports = db;

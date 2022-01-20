@@ -43,14 +43,14 @@
 
 .visuel {
     display: flex;
-    width: 300px;
-    height: 300px;
+    max-width: 80%;
+    height: auto;
     margin: auto;
 }
 
 .visuel img {
     max-width: 90%;
-    height: 90%;    
+    height: auto;     
 }
 
 .content {

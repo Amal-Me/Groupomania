@@ -3,10 +3,8 @@ export const GET_PUBLICATIONS = "GET_PUBLICATIONS";
 export const getPublications = () => {
   const auth = JSON.parse(sessionStorage.getItem("auth"));
   return (dispatch) => {
-    //on initialise la source et on écoute
-    const source = new EventSource(
-      "http://localhost:3000/api/forum/stream/?Id=" + auth.userId + "&Token=" + auth.token,
-    );
+    //on initialise la source et on écoute ?Id=" + auth.userId + "&Token=" + auth.token
+    const source = new EventSource("http://localhost:3000/api/forum/stream/?Id=" + auth.userId + "&Token=" + auth.token,);
     source.addEventListener("open", () => {
       console.log("SSE opened!");
     });

@@ -4,7 +4,6 @@ const router = express.Router();
 
 //importation du chemin comprenant la logique de traitement
 const forumCtrl = require("../controllers/forum");
-const auth = require("../middleware/auth");
 const authStream = require("../middleware/authStream");
 
 //chemin d'authentification et de traitement associé

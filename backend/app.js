@@ -4,7 +4,7 @@ const app         = express();
 //HELMET collection de middleware définissant des en-têtes HTTP liés à la sécurité
 const helmet      = require('helmet');
 //mysql pour les interactions avec la BDD
-const mysql = require('mysql');
+// const mysql = require('mysql');
 //accès au chemin de notre serveur(path)
 const path        = require('path');
 const userRoutes  = require('./routes/user');
@@ -17,22 +17,15 @@ dotenv.config();
 
  
 
-var db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: ""
-});
+// var db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "Formation2021"
+// });
+
 
 // connection a la base de données
-db.connect( (err) => {
-  if (err) throw err;
-  console.log("Connecté à la base de données MySQL!");
-  
-  db.query("CREATE DATABASE IF NOT EXISTS groupomania", (err, result) => {
-    if (err) throw err;
-    console.log("Base de données créée !");
-  });
-});
+
 
 app.use(helmet());
 

@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     const userId = req.url.split("?Id=")[1].split("&Token=")[0];
     const token = req.url.split("?Id=")[1].split("&Token=")[1];    
     //verification-décodage stocké dans la requête pour réutilisation
-    tokId = jwt.verify(token, "Clé_très_sécurisée");      
+    tokId = jwt.verify(token, process.env.TOKEN_KEY);      
     //comparaison userId avec celui extrait du token
     if (userId == tokId.userId) {
       next();

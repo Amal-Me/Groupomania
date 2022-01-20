@@ -19,12 +19,12 @@ export default function InputArea() {
     }
   };
 
-  
+  const ImgUp = document.querySelector("#imgUp");
   //soumission formulaire
   const handleForm = (e) => {
     e.preventDefault();
     const auth = JSON.parse(sessionStorage.getItem("auth"));
-    const ImgUp = document.querySelector("#imgUp");
+    
     const formData = new FormData();
     formData.append("Content", post.Content);
     formData.append("image", ImgUp.files[0]);
