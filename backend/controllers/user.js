@@ -64,7 +64,7 @@ exports.login = (req, res, next) => {
             token: jwt.sign(
               //encodage du token
               { userId: user.UserId },
-              process.env.TOKEN_KEY,
+              "Clé_très_sécurisée",
               { expiresIn: "24h" }
             ),
           });
