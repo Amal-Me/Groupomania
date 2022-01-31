@@ -75,7 +75,7 @@ export default function Signup() {
         <input
           onInput={handleInputs}
           value={sign.password}
-          type="text"
+          type="password"
           id="Motdepasse"
           placeholder="Entrez un mot de passe"
           className="inp-password"
@@ -88,7 +88,7 @@ export default function Signup() {
         <input
           onInput={handleInputs}
           value={sign.passwordbis}
-          type="text"
+          type="password"
           id="Motdepassebis"
           placeholder="Entrez à nouveau votre mot de passe"
           className="inp-passwordbis"

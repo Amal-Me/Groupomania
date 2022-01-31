@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import {  useNavigate } from "react-router-dom";
 import "./Login.css";
 
 //connection
 export default function Login() {
+  const Navigate = useNavigate();
   //initialisation du state local
   const [login, setLogin] = useState({
     email: "",
@@ -20,7 +22,7 @@ export default function Login() {
       .then((response) => response.json())
       .then((response) => {
         sessionStorage.setItem("auth", JSON.stringify(response));
-        document.location.href = "http://localhost:3001/forum";
+        Navigate ("/forum");
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +67,7 @@ export default function Login() {
         <input
           onInput={handleInputs}
           value={login.password}
-          type="text"
+          type="password"
           id="Motdepasse"
           placeholder="Entrez un mot de passe"
           className="inp-password"

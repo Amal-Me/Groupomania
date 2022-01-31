@@ -27,8 +27,8 @@
     margin-top: 20px;
 }
 
-.nav a {
-   text-decoration: none;
+.nav p {
+   cursor: pointer;
    color: white;
    padding-right: 15px;
 }

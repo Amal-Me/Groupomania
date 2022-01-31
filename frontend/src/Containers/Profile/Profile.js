@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {  useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import "./Profile.css";
 //useDispatch pour lancer les actions
@@ -9,6 +10,8 @@ import { deleteUser } from "../../action";
 
 //page profil
 export default function Profile() {
+
+  const Navigate = useNavigate();
   
   const sup = require("../../images/sup.png");
   const dispatch = useDispatch(); 
@@ -92,7 +95,7 @@ export default function Profile() {
       Job: "",
     });
     setTimeout(() => {
-      document.location.href="http://localhost:3001/forum";
+      Navigate("/forum");
     }, 500);
     
   };
@@ -108,7 +111,7 @@ export default function Profile() {
       alert("Votre compte va bien être supprimé");
       //nettoyage des informations et déconnection
       sessionStorage.clear();
-      document.location.href="http://localhost:3001/";
+      Navigate("/");
     } else {
       alert("La suppression a été annulée");
     }
@@ -120,7 +123,7 @@ export default function Profile() {
       <div className="profilZone">        
         <img className="profilImg" src={profile[0].ImageUrl} alt="profil_Image" />
         <div className="infoProfil">
-          <a href="http://localhost:3001/forum"><button className="btn">Retour au Forum</button></a>
+          <button className="btn" onClick={() => Navigate("/forum")}>Retour au Forum</button>
         <p>Choisissez un pseudo et une image pour personnaliser votre avatar</p> 
           <p>
             Pseudo: <span>{profile[0].Pseudo}</span>

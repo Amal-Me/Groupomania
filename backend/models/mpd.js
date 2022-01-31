@@ -1,3 +1,4 @@
+//mysql pour les interactions avec la BDD
 const mysql = require("mysql");
 var db = "";
 

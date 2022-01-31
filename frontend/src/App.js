@@ -3,12 +3,13 @@ import "./App.css";
 import Home from "./Containers/Home/Home";
 import Forum from "./Containers/Forum/Forum";
 import Profile from "./Containers/Profile/Profile";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { isEmpty } from "./Components/Utils";
 
 function App() {
   
   //vérification de l'existence d'un token pour autoriser le routage
+  const Navigate = useNavigate();
   const auth = JSON.parse(sessionStorage.getItem("auth"));
   let isAuth;
   !isEmpty(auth) &&

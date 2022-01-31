@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 //bandeau d'en-tête
 export default function Header() {
+  const Navigate = useNavigate();
+
   const logo = require("../../images/logo.png");
   const user = require("../../images/user.png");
   const deco = require("../../images/deco.png");
@@ -14,15 +17,17 @@ export default function Header() {
         <h1>"Une équipe qui échange et communique est toujours meilleure"</h1>
         <div className="nav">
           <img className="user" src={user} alt="user" />
-          <a href="http://localhost:3001/profile">Mon profil</a>
+          {/* <a href="http://localhost:3001/profile">Mon profil</a> */}
+          <p onClick={() => Navigate("/profile")}>Mon profil</p>
           <img className="deco" src={deco} alt="deconnection" />
-          <a
-            href="http://localhost:3001/"
-            // a la deconnection nettoyage du storage
-            onClick={() => sessionStorage.clear()}
+          <p
+            onClick={() => {
+              sessionStorage.clear();
+              Navigate("/");
+            }}
           >
             Déconnexion
-          </a>
+          </p>
         </div>
       </div>
     </>
