@@ -82,7 +82,7 @@ const sqlInsForum =
 db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Formation2021",
+  password: "",
   multipleStatements: true,  
 });
 db.connect( (err) => {

@@ -13,7 +13,10 @@ const publicationRoutes = require('./routes/publication');
 const dotenv = require('dotenv');
 dotenv.config();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8f8818a98ad3f8948b6e05713d72631ac8a37886
 app.use(helmet());
 
 //CORS

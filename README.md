@@ -24,7 +24,7 @@ salariés.
 
 Depuis le dossier backend, dans le terminal lancez **npm install** pour installer les dépendances 
 
-La base de données à été configurée pour être crée au lancement, il vous suffit d'ajouter votre mot de passe dans **app.js** ligne 23 ainsi que dans le fichier **mpd.js** ligne 85.
+La base de données à été configurée pour être crée au lancement, il vous suffit d'ajouter votre mot de passe dans le fichier **mpd.js** ligne 85.
 
 Lancer **node server.js**
 
