@@ -1,8 +1,8 @@
-#GROUPOMANIA
+# GROUPOMANIA
 
-##P7 - Créez un réseau social d’entreprise
+## P7 - Créez un réseau social d’entreprise
 
-###Exigences émises par le comité de pilotage :
+### Exigences émises par le comité de pilotage :
 
 - la présentation des fonctionnalités doit être simple ;
 - la création d’un compte doit être simple et possible depuis un téléphone mobile ;
@@ -16,9 +16,9 @@
 participations des employés
 salariés.
 
-###Installations nécéssaire:
+### Installations nécéssaire:
 
-##BACKEND
+## BACKEND
 
 **MYSQL** (Pour l’installation MySQL 8.0 , Utiliser la méthode d’authentification existante qui conserve la compatibilité MySQL 5.x)  
 
@@ -28,7 +28,7 @@ La base de données à été configurée pour être crée au lancement, il vous 
 
 Lancer **node server.js**
 
-##FRONTEND
+## FRONTEND
 
 Depuis le dossier frontend, dans le terminal lancez **npm install** pour installer les dépendances 
 
