@@ -1,10 +1,13 @@
+import API_BASE_URL from '../config.js';
+
+
 //action de réception SSE
 export const GET_PUBLICATIONS = "GET_PUBLICATIONS";
 export const getPublications = () => {
   const auth = JSON.parse(sessionStorage.getItem("auth"));
   return (dispatch) => {
     //on initialise la source et on écoute ?Id=" + auth.userId + "&Token=" + auth.token
-    const source = new EventSource("http://localhost:3000/api/forum/stream/?Id=" + auth.userId + "&Token=" + auth.token,);
+    const source = new EventSource(`${API_BASE_URL}/api/forum/stream/?Id=` + auth.userId + "&Token=" + auth.token,);
     source.addEventListener("open", () => {
       console.log("SSE opened!");
     });
@@ -37,7 +40,7 @@ export const deletePublication = (data1, data2, data3) => {
   };
 
   return (dispatch) => {
-    return fetch("http://localhost:3000/api/publication/", requestOptions)
+    return fetch(`${API_BASE_URL}/api/publication/`, requestOptions)
       .then((response) => response.json())
       .then((response) => {
         dispatch({ type: DELETE_PUBLICATION, payload: response });
@@ -66,7 +69,7 @@ export const deleteComment = (data1, data2, data3) => {
 
   return (dispatch) => {
     return fetch(
-      "http://localhost:3000/api/publication/comment/",
+      `${API_BASE_URL}/api/publication/comment/`,
       requestOptions
     )
       .then((response) => response.json())
@@ -95,7 +98,7 @@ export const deleteUser = (data1, data2) => {
   };
 
   return (dispatch) => {
-    return fetch("http://localhost:3000/api/profile/", requestOptions)
+    return fetch(`${API_BASE_URL}/api/profile/`, requestOptions)
       .then((response) => response.json())
       .then((response) => {
         dispatch({ type: DELETE_USER, payload: response });
@@ -123,7 +126,7 @@ export const likeModify = (data1, data2, data3) => {
   };
 
   return (dispatch) => {
-    return fetch("http://localhost:3000/api/publication/like", requestOptions)
+    return fetch(`${API_BASE_URL}/api/publication/like`, requestOptions)
       .then((response) => response.json())
       .then((response) => {
         dispatch({ type: LIKE_STATE, payload: response });

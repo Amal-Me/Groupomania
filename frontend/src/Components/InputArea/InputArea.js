@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./InputArea.css";
+import { API_BASE_URL } from "../../config";
+
 
 //zone de saisie publication
 export default function InputArea() {
@@ -36,7 +38,7 @@ export default function InputArea() {
       headers: { authorization: `Bearer ${auth.token}` },
       body: formData,
     };
-    fetch("http://localhost:3000/api/publication/", requestOptions)
+    fetch(`${API_BASE_URL}/api/publication/`, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

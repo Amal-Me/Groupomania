@@ -6,6 +6,7 @@ import "./Profile.css";
 import { useDispatch } from "react-redux";
 //importation de l'action
 import { deleteUser } from "../../action";
+import { API_BASE_URL } from "../../config.js"
 
 
 //page profil
@@ -81,7 +82,7 @@ export default function Profile() {
       headers: { authorization: `Bearer ${auth.token}` },
       body: formData,
     };
-    fetch("http://localhost:3000/api/profile", requestOptions)
+    fetch(`${API_BASE_URL}/api/profile`, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import { verifInput } from "../Utils";
+import { API_BASE_URL } from "../../config.js";
 
 //inscription
 export default function Signup() {
@@ -21,7 +22,7 @@ export default function Signup() {
     };
     //conditions de vérifications REGEX avant envoi
     if (verifInput()) {
-      fetch("http://localhost:3000/api/auth/signup", requestOptions)
+      fetch(`${API_BASE_URL}/api/auth/signup`, requestOptions)
         .then((response) => response.json())
         .catch((err) => console.log(err));
 

@@ -6,6 +6,7 @@ import { isEmpty } from "../Utils";
 import { useDispatch } from "react-redux";
 import { deletePublication } from "../../action";
 import { likeModify } from "../../action";
+import { API_BASE_URL } from "../../config.js";
 
 export default function Publication({ publication }) {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ export default function Publication({ publication }) {
       body: formData,
     };
     console.log(requestOptions);
-    fetch("http://localhost:3000/api/publication/comment", requestOptions)
+    fetch(`${API_BASE_URL}/api/publication/comment`, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

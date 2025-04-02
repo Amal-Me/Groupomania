@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import "./Login.css";
+import { API_BASE_URL } from "../../config.js";
 
 //connection
 export default function Login() {
@@ -18,7 +19,7 @@ export default function Login() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(login),
     };
-    fetch("http://localhost:3000/api/auth/login", requestOptions)
+    fetch(`${API_BASE_URL}/api/auth/login`, requestOptions)
       .then((response) => response.json())
       .then((response) => {
         sessionStorage.setItem("auth", JSON.stringify(response));
